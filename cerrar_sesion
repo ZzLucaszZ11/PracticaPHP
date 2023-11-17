@@ -1,6 +1,0 @@
-<?php
-    session_start();    //Crea sesión y la recupera si esta iniciada
-    session_destroy();
-    header('location: iniciar_sesion.php');
-    
-?>
