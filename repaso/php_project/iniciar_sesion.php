@@ -18,8 +18,8 @@
 
         $_servidor = 'localhost';
         $_usuario = 'root';
-        $_contrasena = 'medac';
-        $_base_de_datos = 'amazon';
+        $_contrasena = 'lmm12345';
+        $_base_de_datos = 'dvdpeliculas';
 
         $conexion = new Mysqli(
             $_servidor,

@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="css/listado_productos.css">
 
     <title>Listado productos</title>
+</head>
+    <body>
+
     <?php
     session_start();
 
     //comprobar si ha iniciado sesion y si no pues le pondremos la sesion con valor a invitado y un boton de login y si ha iniciado le pondremos un boton de logout
     if (isset($_SESSION["usuario"])) {
-        echo '<a href="./logout.php">Logout</a>';
-        echo '<a href="./producto.php">Añadir producto</a>';
+        echo '<a href="./cerrar_sesion.php">Logout</a>';
+        echo '<a href="./formulario_productos.php">Añadir producto</a>';
     } else {
-        echo '<a href="./login.php">Login</a>';
+        echo '<a href="./iniciar_sesion.php">Login</a>';
     }
     require './conexion.php';
 
@@ -37,7 +40,7 @@
     echo "<tbody>";
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            echo '<ltr>';
+            echo '<tr>';
             echo '<td>' . $row["idProducto"] . '</td>';
             echo '<td>' . $row["nombreProducto"] . '</td>';
             echo '<td>' . $row["precio"] . '</td>';
@@ -55,9 +58,8 @@
 
 
     ?>
-</head>
 
-<body>
+
 
 
 
