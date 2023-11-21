@@ -3,17 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width
+    initial-scale=1.0">
+    <link rel="stylesheet" href="../util/login.css">
     <?php require './bootstrap.php' ?>
-    <link rel="stylesheet" href="./css/login.css">
-
-    <title>Document</title>
+    <title>Login</title>
 
 </head>
 
 <body>
 
     <?php
+    session_start();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_servidor = 'localhost';
@@ -42,6 +43,7 @@
 
             while ($fila = $resultado->fetch_assoc()) { //coje una tabla y cada fila la transforma en una array
                 $password_cifrada = $fila["contrasena"];
+                $_SESSION["rol"] = $fila["rol"];
             }
 
             $acceso_valido = password_verify($contrasenia, $password_cifrada);
@@ -58,52 +60,70 @@
         if ($acceso_valido) {
             $_SESSION["usuario"] = $usuario;
             $usuario = $_SESSION["usuario"];
-            $_SESSION["rol"] = $rol;
+
             // Verificar si el usuario ya tiene una cesta
             $sql_check_cesta = "SELECT * FROM cestas WHERE usuario = '$usuario'";
             $result_check_cesta = $conexion->query($sql_check_cesta);
-      
-            if ($result_check_cesta->num_rows == 0) {
-              // El usuario no tiene una cesta, por lo tanto, se crea una cesta vacía
-              $sql_crear_cesta = "INSERT INTO cestas (usuario) VALUES ('$usuario')";
-              if ($conexion->query($sql_crear_cesta) === TRUE) {
-                echo "Se ha adjuntado una cesta vacía al iniciar sesión.";
-              } else {
-                echo "Error al crear la cesta: " . $conexion->error;
-              }
-            }
-            header('location: listado_productos.php');
-          } else {
-            $error = "El usuario/contraseña son incorrectos";
-          }
-        }
-    
-    ?>
-    <div class="intro">
-        <div style="padding-right: 3em;">
 
-            <img src="./img/amazom.jpg" alt="" width="400px">
-        </div>
-        <form action="" method="post" style="border-left: 2px solid #FF9900; padding-left:3em">
-            <div class="caja">
-                <h3 class="h3_login">Ingrese su cuenta</h3>
-                <div class="cajaInterna">
+            if ($result_check_cesta->num_rows == 0) {
+                // El usuario no tiene una cesta, por lo tanto, se crea una cesta vacía
+                $sql_crear_cesta = "INSERT INTO cestas (usuario) VALUES ('$usuario')";
+                if ($conexion->query($sql_crear_cesta) === TRUE) {
+                    echo "Se ha adjuntado una cesta vacía al iniciar sesión.";
+                } else {
+                    echo "Error al crear la cesta: " . $conexion->error;
+                }
+            }
+
+        } else {
+            $error = "El usuario/contraseña son incorrectos";
+        }
+
+
+
+
+
+
+
+    }
+
+    ?>
+
+
+    <div class="wrapper">
+        <form action="" method="post" style="border-left: 2px solid rgb(238, 237, 237); padding-left:3em">
+            <h1>Login</h1>
+            <div class="input-box">
                 <label class="label_nombre">Usuario:</label>
                 <input class="form-control" type="text" name="usuario">
-                <?php if (isset($err_usuario)) echo $err_usuario ?>
-                <br><br>
-                <label class="label_nombre">Contraseña:</label>
-                <input class="form-control" type="password" name="contrasenia">
+
+                <?php if (isset($err_usuario))
+                    echo $err_usuario ?>
+                    <br><br>
                 </div>
-            </div>
-            <br><br>
-            <?php if (isset($err_fecha)) echo $err_fecha ?>
-            <input class="btn btn-primary mb-3" type="submit" value="enviar">
+                <div class="input-box">
+                    <label class="label_nombre">Contraseña:</label>
+                    <input class="form-control" type="password" name="contrasenia">
+
+                </div>
+                <div class="remember-forgot">
+                    <p>Si no tienes cuenta registrate <a href="registrarse.php">aquí</a></p>
+
+                    <br>
+                </div>
+
+            <?php if (isset($err_fecha))
+                    echo $err_fecha ?>
+                <input class="btn btn-primary mb-3 boton" type="submit" value="Login">
+
+
+
+        </div>
+
         </form>
-    </div>
 
 
 
-</body>
+    </body>
 
-</html>
+    </html>
