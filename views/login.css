@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    background-image: url('img/scarface.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  .wrapper {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+  
+  .wrapper form {
+    border-left: 2px solid rgb(238, 237, 237);
+    padding-left: 3em;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 50px;
+  }
+  
+  .wrapper h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-box {
+    margin-bottom: 20px;
+  }
+  
+  .input-box label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-box input[type="text"],
+  .input-box input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .alert {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .remember-forgot {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .remember-forgot a {
+    color: #ff0000;
+    text-decoration: none;
+  }
+  
+  .remember-forgot a:hover {
+    text-decoration: underline;
+  }
+  
+  .boton {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #ff0000;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+  
+  .boton:hover {
+    background-color: #e60000;
+  }
+  
